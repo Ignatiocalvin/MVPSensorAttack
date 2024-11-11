@@ -1,0 +1,60 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+#container {
+    display: flex;
+    flex: 1;
+}
+
+#left, #right {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#middle-line {
+    width: 2px;
+    background-color: #ccc;
+}
+
+#chatbox {
+    position: fixed;
+    bottom: 20px;
+    right: 220px;
+    width: 300px;
+}
+
+#chat-form, #input-form, #task-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+#chat-input, #first-input, #second-input, #task-input {
+    padding: 5px;
+    margin: 5px 0;
+}
+
+#send-button, #send-button-datapoints, #submit-task-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+#llm-prompter, #task-response {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
