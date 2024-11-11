@@ -5,42 +5,32 @@ $(document).ready(function() {
         var message = $('#chat-input').val().trim();
         if (message === '') return; // Ignore empty messages
 
-        // Display user message
         $('#chat-messages').append('<p><strong>You:</strong> ' + message + '</p>');
-        $('#chat-input').val(''); // Clear chat input
-
-        // Show loading indicator
+        $('#chat-input').val('');
         $('#chat-messages').append('<p id="loading"><em>Bot is thinking...</em></p>');
 
-        // Send message to server
         $.ajax({
             url: '/chat',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({message: message}),
             success: function(response) {
-                $('#loading').remove(); // Remove loading indicator
-                if (response.error) {
-                    $('#chat-messages').append('<p><strong>Error:</strong> ' + response.error + '</p>');
-                } else {
-                    $('#chat-messages').append('<p><strong>Bot:</strong> ' + response.response + '</p>');
-                }
+                $('#loading').remove();
+                $('#chat-messages').append('<p><strong>Bot:</strong> ' + response.response + '</p>');
                 $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                $('#loading').remove(); // Remove loading indicator
+            error: function() {
+                $('#loading').remove();
                 $('#chat-messages').append('<p><strong>Error:</strong> Failed to get response from server.</p>');
             }
         });
     });
 
-    // Handle input form submission for data points
+    // Handle data point analysis form submission
     $('#input-form').submit(function(e) {
         e.preventDefault();
         var firstValue = $('#first-input').val();
         var secondValue = $('#second-input').val();
-
-        // Show loading indicator
         $('#llm-prompter p').text('Analyzing...');
 
         $.ajax({
@@ -49,15 +39,34 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify({first_value: firstValue, second_value: secondValue}),
             success: function(response) {
-                if (response.error) {
-                    $('#llm-prompter p').text('Error: ' + response.error);
-                } else {
-                    $('#llm-prompter p').text(response.response);
-                }
+                $('#llm-prompter p').text(response.response);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
+            error: function() {
                 $('#llm-prompter p').text('Error: Failed to get analysis from server.');
             }
+        });
+    });
+
+    // Handle task submission
+    $('#submit-task-button').click(function() {
+        var taskContent = $('#task-input').val().trim();
+        if (taskContent === '') return; // Ignore empty input
+
+        $('#task-response-content').text('Submitting task...');
+
+        fetch('/submit_task', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({input1: taskContent})
+        })
+        .then(response => response.json())
+        .then(data => {
+            $('#task-response-content').text(data.response || 'Task response received.');
+        })
+        .catch(() => {
+            $('#task-response-content').text('Error: Failed to get response from server.');
         });
     });
 });

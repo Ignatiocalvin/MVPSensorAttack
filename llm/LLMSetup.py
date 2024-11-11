@@ -20,5 +20,5 @@ def interact(query):
     )
 
     resp = chat_model.invoke(query)
-    return resp
+    return resp.content
 

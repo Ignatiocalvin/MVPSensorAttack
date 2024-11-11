@@ -26,32 +26,30 @@
             width: 2px;
             background-color: #ccc;
         }
-        #intro {
-            text-align: center;
-        }
         #chatbox {
             position: fixed;
             bottom: 20px;
             right: 220px;
             width: 300px;
         }
-        #chat-form, #input-form {
+        #chat-form, #input-form, #task-form {
             display: flex;
+            flex-direction: column;
             margin-top: 10px;
         }
-        #chat-input, #first-input, #second-input {
-            flex: 1;
+        #chat-input, #first-input, #second-input, #task-input {
             padding: 5px;
-            margin-right: 5px;
+            margin: 5px 0;
         }
-        #send-button, #send-button-datapoints {
+        #send-button, #send-button-datapoints, #submit-task-button {
             padding: 5px 10px;
             background-color: #007bff;
             color: white;
             border: none;
             cursor: pointer;
+            align-self: flex-start;
         }
-        #llm-prompter {
+        #llm-prompter, #task-response {
             margin-top: 20px;
             padding: 10px;
             background-color: #f0f0f0;
@@ -59,7 +57,6 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="script"></script>
 </head>
 <body>
     <div id="container">
@@ -69,6 +66,7 @@
                 <h1>Physical Guards</h1>
                 <p>Welcome to the Physical Guards system. Use the chat on the right to communicate or input data points below for analysis.</p>
             </div>
+            <!-- Data Point Analysis Form -->
             <div id="input-forms">
                 <h2>Data Point Analysis</h2>
                 <form id="input-form">
@@ -98,5 +96,7 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
