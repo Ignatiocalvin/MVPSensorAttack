@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Guards Homepage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+        #container {
+            display: flex;
+            flex: 1;
+        }
+        #left, #right {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        #middle-line {
+            width: 2px;
+            background-color: #ccc;
+        }
+        #intro {
+            text-align: center;
+        }
+        #chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 220px;
+            width: 300px;
+        }
+        #chat-form, #input-form {
+            display: flex;
+            margin-top: 10px;
+        }
+        #chat-input, #first-input, #second-input {
+            flex: 1;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        #send-button, #send-button-datapoints {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #llm-prompter {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <!-- Left side -->
+        <div id="left">
+            <div id="intro">
+                <h1>Physical Guards</h1>
+                <p>Welcome to the Physical Guards system. Use the chat on the right to communicate or input data points below for analysis.</p>
+            </div>
+            <div id="input-forms">
+                <h2>Data Point Analysis</h2>
+                <form id="input-form">
+                    <input type="text" id="first-input" placeholder="Enter first value" required aria-label="First value">
+                    <input type="text" id="second-input" placeholder="Enter second value" required aria-label="Second value">
+                    <button type="submit" id="send-button-datapoints">Analyze</button>
+                </form>
+            </div>
+            <div id="llm-prompter">
+                <h3>Analysis Result</h3>
+                <p>The analysis result will appear here after submission.</p>
+            </div>
+        </div>
+
+        <!-- Middle Line Divider -->
+        <div id="middle-line" role="separator" aria-orientation="vertical"></div>
+
+        <!-- Right side -->
+        <div id="right">
+            <h2>Chat with Physical Guards</h2>
+            <div id="chat-messages"></div>
+            <div id="chatbox">
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Type your message..." required aria-label="Chat message">
+                    <button type="submit" id="send-button">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
